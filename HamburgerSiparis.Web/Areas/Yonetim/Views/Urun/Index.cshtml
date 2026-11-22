@@ -1,0 +1,44 @@
+﻿@model IEnumerable<HamburgerSiparis.EntityLayer.Urun>
+
+@{
+    ViewBag.Title = "Ürünler";
+    Layout = "~/Areas/Yonetim/Views/Shared/_YonetimLayout.cshtml";
+}
+
+<div class="admin-kart shadow-lg mt-4 border-0">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-3" style="border-bottom: 1px solid #2a2a2a;">
+        <h4 class="mb-0 text-white font-weight-bold">Ürünler</h4>
+        <a href="/Yonetim/Urun/Ekle" class="btn btn-turuncu px-4 py-2" style="border-radius: 8px;">Yeni Ürün Ekle</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-borderless align-middle mb-0">
+            <thead>
+                <tr style="border-bottom: 2px solid #2a2a2a;">
+                    <th class="text-muted pb-3" style="font-weight: 500;">ID</th>
+                    <th class="text-muted pb-3" style="font-weight: 500;">Ürün Adı</th>
+                    <th class="text-muted pb-3" style="font-weight: 500;">Kategori</th>
+                    <th class="text-muted pb-3" style="font-weight: 500;">Fiyat</th>
+                    <th class="text-right text-muted pb-3" style="font-weight: 500;">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="border-bottom: 1px solid #2a2a2a; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#222'" onmouseout="this.style.backgroundColor='transparent'">
+                        <td class="py-3 align-middle text-secondary">#@item.UrunId</td>
+                        <td class="py-3 align-middle text-light font-weight-bold">@item.UrunAdi</td>
+                        <td class="py-3 align-middle">
+                            <span class="badge" style="background-color: #333; color: #bbb; border: 1px solid #444; padding: 6px 12px;">@item.Kategori.KategoriAdi</span>
+                        </td>
+                        <td class="py-3 align-middle font-weight-bold" style="color: #ff6600;">@item.Fiyat.ToString("N2") ₺</td>
+                        <td class="py-3 align-middle text-right">
+                            <a href="/Yonetim/Urun/Duzenle/@item.UrunId" class="btn btn-sm btn-turuncu mr-2" style="padding: 6px 16px;">Düzenle</a>
+                            <a href="/Yonetim/Urun/Sil/@item.UrunId" class="btn btn-sm text-white" style="background-color: #dc3545; padding: 6px 16px; border-radius: 6px;" onclick="return confirm('Bu efsanevi lezzeti menüden uçurmak istediğine emin misin patron?');">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

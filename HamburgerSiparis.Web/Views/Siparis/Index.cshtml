@@ -1,0 +1,61 @@
+﻿@model IEnumerable<HamburgerSiparis.EntityLayer.Siparis>
+
+@{
+    ViewBag.Title = "Mutfak - Gelen Siparişler";
+    Layout = "~/Areas/Yonetim/Views/Shared/_YonetimLayout.cshtml";
+}
+
+<div class="admin-kart shadow-lg mt-4 border-0">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-3" style="border-bottom: 1px solid #2a2a2a;">
+        <h4 class="mb-0 text-white font-weight-bold">🔔 Gelen <span class="text-warning">Siparişler</span> (Mutfak Ekranı)</h4>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-borderless align-middle mb-0">
+            <thead>
+                <tr style="border-bottom: 2px solid #2a2a2a;">
+                    <th class="text-muted pb-3">Sipariş No</th>
+                    <th class="text-muted pb-3">Tarih</th>
+                    <th class="text-muted pb-3">Sipariş Detayı</th>
+                    <th class="text-muted pb-3">Tutar</th>
+                    <th class="text-muted pb-3">Durum</th>
+                    <th class="text-right text-muted pb-3">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="border-bottom: 1px solid #2a2a2a; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#222'" onmouseout="this.style.backgroundColor='transparent'">
+                        <td class="py-3 align-middle text-secondary font-weight-bold">#@item.SiparisId</td>
+                        <td class="py-3 align-middle text-light">@item.SiparisTarihi.ToString("dd MMM yyyy HH:mm")</td>
+                        <td class="py-3 align-middle text-info">
+                            @string.Join(", ", item.SiparisDetaylari.Select(x => x.Adet + "x " + (x.Urun != null ? x.Urun.UrunAdi : "Ürün Silinmiş")))
+                        </td>
+                        <td class="py-3 align-middle font-weight-bold" style="color: #ff6600;">@item.ToplamTutar.ToString("N2") ₺</td>
+                        <td class="py-3 align-middle">
+                            @if (item.Durum == "Hazırlanıyor")
+                            {
+                                <span class="badge badge-warning text-dark px-2 py-1">@item.Durum</span>
+                            }
+                            else if (item.Durum == "İptal Edildi")
+                            {
+                                <span class="badge badge-danger px-2 py-1">@item.Durum</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-success px-2 py-1">@item.Durum</span>
+                            }
+                        </td>
+                        <td class="py-3 align-middle text-right">
+                            @if (item.Durum == "Hazırlanıyor")
+                            {
+                                <a href="/Yonetim/Siparis/DurumGuncelle?id=@item.SiparisId&yeniDurum=Teslim%20Edildi" class="btn btn-sm btn-success mr-2">✔️ Tamamla</a>
+                                <a href="/Yonetim/Siparis/DurumGuncelle?id=@item.SiparisId&yeniDurum=İptal%20Edildi" class="btn btn-sm btn-danger" onclick="return confirm('Siparişi iptal etmek istediğine emin misin?');">❌ İptal</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

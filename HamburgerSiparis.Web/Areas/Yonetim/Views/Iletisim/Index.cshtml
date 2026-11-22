@@ -1,0 +1,36 @@
+﻿@model IEnumerable<HamburgerSiparis.EntityLayer.Iletisim>
+
+@{
+    ViewBag.Title = "İletişim Bilgileri";
+    Layout = "~/Areas/Yonetim/Views/Shared/_YonetimLayout.cshtml";
+}
+
+<h2 class="mt-3">İletişim Bilgilerimiz</h2>
+<hr />
+
+<a href="/Yonetim/Iletisim/Ekle" class="btn btn-primary mb-3">Yeni İletişim Bilgisi Ekle</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Adres</th>
+            <th>Telefon</th>
+            <th>E-Mail</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Adres</td>
+                <td>@item.Telefon</td>
+                <td>@item.Email</td>
+                <td>
+                    <a href="/Yonetim/Iletisim/Duzenle/@item.IletisimId" class="btn btn-warning btn-sm">Düzenle</a>
+                    <a href="/Yonetim/Iletisim/Sil/@item.IletisimId" class="btn btn-danger btn-sm" onclick="return confirm('Bu iletişim bilgisini silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

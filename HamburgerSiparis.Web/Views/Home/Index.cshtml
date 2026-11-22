@@ -1,0 +1,223 @@
+﻿@model IEnumerable<HamburgerSiparis.EntityLayer.Urun>
+
+@{
+    ViewBag.Title = "Menü";
+}
+
+<div class="row mb-5 mt-2">
+    <div class="col-12">
+        <img src="~/Images/burger_house_hero.png" class="img-fluid w-100 shadow" style="height: 450px; object-fit: cover; border-radius: 15px;" alt="Burger House">
+    </div>
+</div>
+
+<div class="d-flex mb-4">
+    <div style="width: 35%;">
+        <input type="search" id="urunAraKutusu" class="form-control arama-kutusu" placeholder="Search...">
+    </div>
+</div>
+
+<div class="d-flex justify-content-center flex-wrap mb-4 gap-2">
+
+    <a href="/Home/Index" class="btn btn-outline-warning">Tümü</a>
+
+    @foreach (var kategori in ViewBag.Kategoriler)
+    {
+        <a href="/Home/Index/@kategori.KategoriId" class="btn btn-outline-warning">@kategori.KategoriAdi</a>
+    }
+
+</div>
+
+
+
+
+<div class="row" id="urunListesiContainer">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 urun-item" data-ad="@item.UrunAdi.ToLower()">
+            <div class="card burger-kart h-100">
+                <div class="card-img-container">
+                    <img src="@(string.IsNullOrEmpty(item.ResimYolu) ? "https://cdn-icons-png.flaticon.com/512/3075/3075977.png" : item.ResimYolu)" class="img-fluid burger-resim" alt="@item.UrunAdi">
+                </div>
+                <div class="card-body p-3 d-flex flex-column">
+                    <h5 class="kart-baslik">@item.UrunAdi</h5>
+                    <p class="kart-aciklama">@(string.IsNullOrEmpty(item.Aciklama) ? "Gölyaka Burger'in taze ve efsanevi lezzeti." : item.Aciklama)</p>
+
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <p class="fiyat-yazi">@item.Fiyat.ToString("N2") ₺</p>
+                        <button type="button" class="btn turuncu-ekle-btn urun-sec-btn"
+                                data-id="@item.UrunId"
+                                data-ad="@item.UrunAdi"
+                                data-fiyat="@item.Fiyat"
+                                data-kategori="@item.KategoriId"
+                                data-resim="@(string.IsNullOrEmpty(item.ResimYolu) ? "https://cdn-icons-png.flaticon.com/512/3075/3075977.png" : item.ResimYolu)">
+                            Sepete Ekle
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="modal fade" id="urunDetayModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 480px;">
+        <div class="modal-content border-0 shadow-lg" style="background-color: #1a1a1a; color: white; border-radius: 12px; overflow: hidden;">
+
+           
+
+            <div style="background-color: #111; padding: 20px 0;">
+                <img id="modalUrunResmi" src="" class="img-fluid mx-auto d-block" style="height: 200px; object-fit: contain;" />
+            </div>
+
+            <div class="modal-body px-4 py-4" style="background-color: #1a1a1a;">
+
+                <div class="row" id="modalMalzemeler">
+                    <div class="col-6 pr-2">
+                        <h6 class="mb-3" style="font-size: 0.95rem; font-weight: 600; color: #fff;">İçinden Çıkar</h6>
+
+                        <label class="mockup-checkbox">
+                            Marul
+                            <input type="checkbox" class="cikar-secim" value="Marulsuz">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="mockup-checkbox">
+                            Domates
+                            <input type="checkbox" class="cikar-secim" value="Domatessiz">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="mockup-checkbox">
+                            Soğan
+                            <input type="checkbox" class="cikar-secim" value="Soğansız">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-6 pl-2">
+                        <h6 class="mb-3" style="font-size: 0.95rem; font-weight: 600; color: #fff;">Ekstra Ekle</h6>
+
+                        <label class="mockup-checkbox">
+                            Ekstra Cheddar <span class="fiyat-etiket">+25₺</span>
+                            <input type="checkbox" class="ekstra-secim" value="Ekstra Cheddar" data-ekstrafiyat="25.00">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="mockup-checkbox">
+                            Çift Köfte <span class="fiyat-etiket">+60₺</span>
+                            <input type="checkbox" class="ekstra-secim" value="Çift Köfte" data-ekstrafiyat="60.00">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row mt-3" id="modalEkstraSecimler">
+                    <div class="col-6 pr-2">
+                        <h6 class="mb-2" style="font-size: 0.9rem; color: #fff;">İçecek Seçimi</h6>
+                        <select id="secilenIcecek" class="mockup-select">
+                            <option value="">İçecek Seçimi</option>
+                            <option value="Kola">Kola</option>
+                            <option value="Fanta">Fanta</option>
+                            <option value="Ayran">Ayran</option>
+                            <option value="Buzlu Çay">Buzlu Çay</option>
+                        </select>
+                    </div>
+                    <div class="col-6 pl-2">
+                        <h6 class="mb-2" style="font-size: 0.9rem; color: #fff;">Sos Seçimi</h6>
+                        <select id="secilenSos" class="mockup-select">
+                            <option value="">Sos Seçimi</option>
+                            <option value="Ketçap">Ketçap</option>
+                            <option value="Mayonez">Mayonez</option>
+                            <option value="Ranch Sos">Ranch Sos</option>
+                            <option value="Acı Sos">Acı Sos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center" style="border-color: #333 !important;">
+                    <div style="font-size: 1.1rem; color: #ccc;">
+                        Güncel Tutar: <span id="modalGuncelTutar" class="font-weight-bold text-white"></span>
+                    </div>
+                    <button type="button" id="modalSepeteAtBtn" class="btn text-white font-weight-bold px-4 py-2" style="background-color: #ff6600; border-radius: 6px;">Sepete Ekle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+
+          
+            $('#urunAraKutusu').on('keyup', function () {
+                let aranan = $(this).val().toLowerCase();
+                $('#urunListesiContainer .urun-item').filter(function () {
+                    $(this).toggle($(this).data('ad').indexOf(aranan) > -1);
+                });
+            });
+
+           
+            let seciliUrunId = 0, tabanFiyat = 0, guncelFiyat = 0;
+
+            $('.urun-sec-btn').click(function () {
+                seciliUrunId = $(this).data('id');
+                tabanFiyat = parseFloat($(this).data('fiyat').toString().replace(',', '.'));
+                guncelFiyat = tabanFiyat;
+
+                let katId = $(this).data('kategori');
+
+                $('#modalUrunAdi').text($(this).data('ad'));
+                $('#modalUrunResmi').attr('src', $(this).data('resim'));
+                $('#modalGuncelTutar').text(guncelFiyat.toFixed(2) + ' ₺');
+
+                if (katId == 1 || katId == 4) {
+                    $('#modalMalzemeler').show();
+                    $('#modalEkstraSecimler').show();
+                }
+                else {
+                    $('#modalMalzemeler').hide();
+                    $('#modalEkstraSecimler').hide();
+                }
+
+                $('.cikar-secim, .ekstra-secim').prop('checked', false);
+                $('#secilenIcecek').val('');
+                $('#secilenSos').val('');
+
+                $('#urunDetayModal').modal('show');
+            });
+
+            $('.ekstra-secim').change(function () {
+                let ekstralarToplam = 0;
+                $('.ekstra-secim:checked').each(function () {
+                    ekstralarToplam += parseFloat($(this).data('ekstrafiyat'));
+                });
+                guncelFiyat = tabanFiyat + ekstralarToplam;
+                $('#modalGuncelTutar').text(guncelFiyat.toFixed(2) + ' ₺');
+            });
+
+            $('#modalSepeteAtBtn').click(function () {
+                let ekstralar = [];
+                $('.cikar-secim:checked, .ekstra-secim:checked').each(function () {
+                    ekstralar.push($(this).val());
+                });
+
+                let icecek = $('#secilenIcecek').val();
+                if (icecek !== "") { ekstralar.push(icecek); }
+                let sos = $('#secilenSos').val();
+                if (sos !== "") { ekstralar.push(sos); }
+
+                $.ajax({
+                    url: '/Sepet/SepeteEkleAjax',
+                    type: 'POST',
+                    data: { id: seciliUrunId, fiyat: guncelFiyat, ekstralar: ekstralar.join(', ') },
+                    success: function (cevap) {
+                        if (cevap.basarili) {
+                            $('#urunDetayModal').modal('hide');
+                            $('#sepetSayaci').text(cevap.sayi);
+                        } else {
+                            alert("Hata: " + cevap.mesaj);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

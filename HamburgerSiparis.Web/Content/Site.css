@@ -1,0 +1,450 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.navbar-custom {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: #ff6600 !important;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    color: #aaaaaa !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-left: 15px;
+    transition: color 0.3s;
+}
+
+    .nav-link:hover, .nav-link.active {
+        color: #ff6600 !important;
+    }
+
+
+body {
+    background-color: #121212; 
+    color: #fff;
+}
+
+.login-box {
+    max-width: 400px;
+    margin: 0 auto;
+    background: #1c1c1c; 
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(255, 102, 0, 0.15); 
+    border: 1px solid #2a2a2a;
+}
+
+.form-control-koyu {
+    background-color: #222;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+    .form-control-koyu:focus {
+        background-color: #2a2a2a;
+        border-color: #ff6600; 
+        color: #fff;
+        box-shadow: none;
+    }
+
+    .form-control-koyu::placeholder {
+        color: #666;
+    }
+
+.btn-turuncu {
+    background-color: #ff6600;
+    color: #111;
+    font-weight: 800;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+    .btn-turuncu:hover {
+        background-color: #e65c00;
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+
+.sepet-kart {
+    background-color: #1c1c1c;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.urun-resim {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    background-color: #222;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.cizgi {
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.turuncu-buton {
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: 0.2s;
+}
+
+    .turuncu-buton:hover {
+        background-color: #e65c00;
+        color: #fff;
+    }
+
+.sepet-baslik {
+    color: #fff;
+    font-weight: 600;
+}
+
+.sepet-fiyat {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+
+.arama-kutusu {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+}
+
+    .arama-kutusu:focus {
+        background-color: #222;
+        border-color: #ff6600;
+        box-shadow: none;
+        color: #fff;
+    }
+
+    .arama-kutusu::placeholder {
+        color: #666;
+    }
+
+.filtre-buton {
+    background-color: transparent;
+    border: 1px solid #ff6600;
+    color: #ff6600;
+    border-radius: 8px;
+    padding: 10px 25px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 130px;
+}
+
+    .filtre-buton:hover {
+        background-color: #ff6600;
+        color: white;
+    }
+
+.dropdown-menu-koyu {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.dropdown-item-koyu {
+    color: #bbb;
+    padding: 10px 20px;
+}
+
+    .dropdown-item-koyu:hover {
+        background-color: #2a2a2a;
+        color: #ff6600;
+    }
+
+
+.burger-kart {
+    background-color: #1c1c1c;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+    .burger-kart:hover {
+        transform: translateY(-5px);
+        border-color: #444;
+    }
+
+.card-img-container {
+    text-align: center;
+    border-bottom: 1px solid #2a2a2a;
+    background-color: #222;
+    border-radius: 12px 12px 0 0;
+    padding: 20px 10px;
+}
+
+.burger-resim {
+    height: 160px;
+    object-fit: contain;
+}
+
+.kart-baslik {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+}
+
+.kart-aciklama {
+    color: #777;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    height: 36px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.fiyat-yazi {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0;
+}
+
+.turuncu-ekle-btn {
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+    .turuncu-ekle-btn:hover {
+        background-color: #e65c00;
+        color: #fff;
+    }
+
+
+
+.mockup-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #ccc;
+    user-select: none;
+}
+
+    .mockup-checkbox input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+.checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    border: 1px solid #555;
+    border-radius: 4px;
+}
+
+.mockup-checkbox:hover input ~ .checkmark {
+    border-color: #888;
+}
+
+.mockup-checkbox input:checked ~ .checkmark {
+    background-color: transparent;
+    border-color: #ff6600; 
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.mockup-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+
+.mockup-checkbox .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid #ff6600;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+
+.mockup-select {
+    background-color: #111;
+    color: #ccc;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+    font-size: 0.9rem;
+    appearance: none; 
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+}
+
+    .mockup-select:focus {
+        outline: none;
+        border-color: #ff6600;
+    }
+
+.fiyat-etiket {
+    float: right;
+    color: #aaa;
+    font-size: 0.85rem;
+    margin-top: 2px;
+}
+
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+
+.login-box {
+    max-width: 400px;
+    margin: 0 auto;
+    background: #1c1c1c;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(255, 102, 0, 0.15);
+    border: 1px solid #2a2a2a;
+}
+
+.form-control-koyu {
+    background-color: #222;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+    .form-control-koyu:focus {
+        background-color: #2a2a2a;
+        border-color: #ff6600;
+        color: #fff;
+        box-shadow: none;
+    }
+
+
+.sidebar {
+    background-color: #1a1a1a;
+    border-right: 1px solid #2a2a2a;
+    min-height: 100vh;
+    padding-top: 20px;
+}
+
+.sidebar-brand {
+    color: #ff6600;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #2a2a2a;
+    margin-bottom: 20px;
+}
+
+.admin-kart {
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.table {
+    color: #fff;
+}
+
+    .table thead th {
+        border-bottom: 2px solid #2a2a2a;
+        color: #ff6600;
+        font-weight: 600;
+        border-top: none;
+    }
+
+    .table td {
+        border-top: 1px solid #2a2a2a;
+        vertical-align: middle;
+        color: #ccc;
+    }
+
+.btn-cikis {
+    color: #ff4444 !important;
+    border: 1px solid #ff4444;
+    border-radius: 8px;
+    margin: 20px;
+    text-align: center;
+}
+
+    .btn-cikis:hover {
+        background-color: #ff4444;
+        color: white !important;
+    }

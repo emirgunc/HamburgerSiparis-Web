@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -Burger House</title>
+
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    @{
+        int sepettekiUrunSayisi = 0;
+        if (Session["Sepet"] != null)
+        {
+            var aktifSepet = (HamburgerSiparis.Web.Models.Sepet)Session["Sepet"];
+            
+            sepettekiUrunSayisi = aktifSepet.SepetLine.Sum(x => x.Adet);
+        }
+    }
+
+    <nav class="navbar navbar-expand-lg navbar-custom py-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="/Home/Index">🍔 BURGER HOUSE</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="text-white"><i class="fas fa-bars"></i></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="/Home/Index">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/Home/Index">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Yonetim/Login/Index">Admin Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Home/Hakkimizda">Hakkımızda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Home/Iletisim">İletişim</a></li>
+                    <li class="nav-item ml-3">
+                        <a href="/Sepet/Index" class="nav-link text-white" style="position: relative; font-size: 1.2rem;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="sepetSayaci" style="position: absolute; top: -6px; right: -12px; background-color: #ff6600; color: white; border-radius: 50%; padding: 2px 7px; font-size: 0.75rem; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.5);">@sepettekiUrunSayisi</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4 mb-5">
+        @RenderBody()
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

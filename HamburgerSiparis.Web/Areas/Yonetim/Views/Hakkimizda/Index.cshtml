@@ -1,0 +1,35 @@
+﻿@model HamburgerSiparis.EntityLayer.Hakkimizda
+
+@{
+    ViewBag.Title = "Hakkımızda Bilgisi";
+    Layout = "~/Areas/Yonetim/Views/Shared/_YonetimLayout.cshtml";
+}
+
+<h2 class="mt-4 mb-4 text-light">Dükkan Hakkında (Biz Kimiz?)</h2>
+
+@if (Model != null)
+{
+    <div class="card bg-dark border-secondary shadow-lg" style="max-width: 900px; border-radius: 10px;">
+        <div class="card-header border-secondary" style="background-color: #1a1d20;">
+            <h4 class="card-title text-warning mb-0 mt-2 pb-2">
+                <i class="fas fa-hamburger me-2"></i> @Model.Baslik
+            </h4>
+        </div>
+        <div class="card-body p-4" style="background-color: #212529;">
+            <p class="card-text text-light" style="font-size: 1.15rem; line-height: 1.8; letter-spacing: 0.5px;">
+                @Model.Icerik
+            </p>
+        </div>
+        <div class="card-footer border-secondary text-end p-3" style="background-color: #1a1d20;">
+            <a href="/Yonetim/Hakkimizda/Duzenle/@Model.HakkimizdaId" class="btn btn-warning px-4 py-2 fw-bold">
+                <i class="fas fa-edit"></i> Yazıyı Düzenle
+            </a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning mt-3">
+        Henüz dükkan hakkında bir yazı eklenmemiş. Lütfen veritabanından veya buradan bir başlangıç yazısı ekleyin.
+    </div>
+}

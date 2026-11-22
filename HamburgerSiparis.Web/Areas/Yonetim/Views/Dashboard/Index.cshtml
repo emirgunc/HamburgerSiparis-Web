@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Areas/Yonetim/Views/Shared/_YonetimLayout.cshtml";
+}
+
+<div class="mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-3" style="border-bottom: 1px solid #2a2a2a;">
+        <h4 class="mb-0 text-white font-weight-bold">Dükkan <span class="text-warning">Özeti</span> 📈</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card border-0 shadow" style="background-color: #1e1e1e; border-left: 5px solid #28a745 !important; border-radius: 10px;">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Toplam Ciro</div>
+                            <div class="h5 mb-0 font-weight-bold text-white">@Convert.ToDecimal(ViewBag.ToplamKazanc).ToString("N2") ₺</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-lira-sign fa-2x text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card border-0 shadow" style="background-color: #1e1e1e; border-left: 5px solid #ff6600 !important; border-radius: 10px;">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Gelen Siparişler</div>
+                            <div class="h5 mb-0 font-weight-bold text-white">@ViewBag.ToplamSiparis Adet</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-shopping-basket fa-2x text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card border-0 shadow" style="background-color: #1e1e1e; border-left: 5px solid #17a2b8 !important; border-radius: 10px;">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Aktif Ürünler</div>
+                            <div class="h5 mb-0 font-weight-bold text-white">@ViewBag.UrunSayisi Çeşit</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-hamburger fa-2x text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card border-0 shadow" style="background-color: #1e1e1e; border-left: 5px solid #dc3545 !important; border-radius: 10px;">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Kategoriler</div>
+                            <div class="h5 mb-0 font-weight-bold text-white">@ViewBag.KategoriSayisi Kategori</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-tags fa-2x text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

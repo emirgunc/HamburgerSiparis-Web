@@ -1,0 +1,30 @@
+﻿@model HamburgerSiparis.EntityLayer.Iletisim
+
+@{
+    ViewBag.Title = "Yeni İletişim Ekle";
+    Layout = "~/Areas/Yonetim/Views/Shared/_YonetimLayout.cshtml";
+}
+
+<h2 class="mt-3">Yeni İletişim Bilgisi Ekle</h2>
+<hr />
+
+@using (Html.BeginForm("Ekle", "Iletisim", FormMethod.Post))
+{
+    <div class="form-group mt-3">
+        <label class="fw-bold">Adres</label>
+        @Html.TextAreaFor(m => m.Adres, new { @class = "form-control", rows = "3", placeholder = "Örn: Kadıköy/İstanbul" })
+    </div>
+
+    <div class="form-group mt-3">
+        <label class="fw-bold">Telefon Numarası</label>
+        @Html.TextBoxFor(m => m.Telefon, new { @class = "form-control", placeholder = "Örn: 0555 555 55 55" })
+    </div>
+
+    <div class="form-group mt-3">
+        <label class="fw-bold">E-Mail Adresi</label>
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Örn: info@hamburger.com", type = "email" })
+    </div>
+
+    <button type="submit" class="btn btn-success mt-4">Sisteme Ekle</button>
+    <a href="/Yonetim/Iletisim/Index" class="btn btn-secondary mt-4">İptal</a>
+}

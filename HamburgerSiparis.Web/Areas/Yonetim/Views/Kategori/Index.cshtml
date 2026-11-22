@@ -1,0 +1,38 @@
+﻿@model IEnumerable<HamburgerSiparis.EntityLayer.Kategori>
+
+@{
+    ViewBag.Title = "Kategoriler";
+    Layout = "~/Areas/Yonetim/Views/Shared/_YonetimLayout.cshtml";
+}
+
+<div class="admin-kart shadow-lg mt-4 border-0">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-3" style="border-bottom: 1px solid #2a2a2a;">
+        <h4 class="mb-0 text-white font-weight-bold">Kategori Listesi</h4>
+        <a href="/Yonetim/Kategori/Ekle" class="btn btn-turuncu px-4 py-2" style="border-radius: 8px;">+ Yeni Kategori</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-borderless align-middle mb-0">
+            <thead>
+                <tr style="border-bottom: 2px solid #2a2a2a;">
+                    <th class="text-muted pb-3" style="font-weight: 500; width: 10%;">ID</th>
+                    <th class="text-muted pb-3" style="font-weight: 500; width: 60%;">Kategori Adı</th>
+                    <th class="text-right text-muted pb-3" style="font-weight: 500; width: 30%;">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="border-bottom: 1px solid #2a2a2a; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#222'" onmouseout="this.style.backgroundColor='transparent'">
+                        <td class="py-3 align-middle text-secondary">#@item.KategoriId</td>
+                        <td class="py-3 align-middle text-warning font-weight-bold">@item.KategoriAdi</td>
+                        <td class="py-3 align-middle text-right">
+                            <a href="/Yonetim/Kategori/Duzenle/@item.KategoriId" class="btn btn-sm btn-turuncu mr-2" style="padding: 6px 16px;">Düzenle</a>
+                            <a href="/Yonetim/Kategori/Sil/@item.KategoriId" class="btn btn-sm text-white" style="background-color: #dc3545; padding: 6px 16px; border-radius: 6px;" onclick="return confirm('Bu kategoriyi uçurmak istediğine emin misin? İçindeki ürünlere dikkat et!');">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

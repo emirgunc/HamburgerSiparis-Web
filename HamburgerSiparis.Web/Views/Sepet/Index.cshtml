@@ -1,0 +1,133 @@
+﻿@model HamburgerSiparis.Web.Models.Sepet
+
+@{
+    ViewBag.Title = "Sepetim";
+}
+
+
+
+<div class="row justify-content-center mt-5 mb-5">
+    <div class="col-md-5">
+        <div class="sepet-kart shadow-lg">
+
+            <div class="d-flex justify-content-between align-items-center mb-4 cizgi pb-3">
+                <h4 class="sepet-baslik mb-0">SEPETİM</h4>
+               
+            </div>
+
+            @if (Model.SepetLine.Count == 0)
+            {
+                <div class="text-center py-5">
+                    <p class="text-muted mb-4">Sepetin şu an boş patron.</p>
+                    <a href="/Home/Index" class="btn turuncu-buton w-50">Menüye Dön</a>
+                </div>
+            }
+            else
+            {
+                <div class="sepet-urunler mb-4">
+                    @for (int i = 0; i < Model.SepetLine.Count; i++)
+                    {
+                        var item = Model.SepetLine[i];
+                        <div class="d-flex justify-content-between align-items-center cizgi py-3 sepet-satir" id="satir-@i">
+                            <div class="d-flex align-items-center">
+                                <img src="@(string.IsNullOrEmpty(item.Urun.ResimYolu) ? "https://cdn-icons-png.flaticon.com/512/3075/3075977.png" : item.Urun.ResimYolu)" class="urun-resim mr-3" />
+                                <div>
+                                    <h6 class="font-weight-bold mb-1 text-light">@item.Urun.UrunAdi</h6>
+
+                                    <div class="d-flex align-items-center justify-content-center bg-dark rounded-pill border border-secondary mt-2" style="width: 90px; height: 34px; flex-wrap: nowrap; overflow: hidden;">
+                                        <button type="button" class="btn text-warning p-0 border-0 d-flex align-items-center justify-content-center" style="width: 30px; height: 100%; font-size: 1.2rem; box-shadow: none;" onclick="adetDegistir(@i, -1)">-</button>
+                                        <span class="text-white font-weight-bold text-center" style="width: 30px; font-size: 0.95rem; user-select: none;" id="adet-gosterge-@i">@item.Adet</span>
+                                        <button type="button" class="btn text-warning p-0 border-0 d-flex align-items-center justify-content-center" style="width: 30px; height: 100%; font-size: 1.2rem; box-shadow: none;" onclick="adetDegistir(@i, 1)">+</button>
+                                    </div>
+
+                                    @if (!string.IsNullOrEmpty(item.Ekstralar))
+                                    {
+                                        <small class="text-warning d-block mt-1" style="font-size: 0.75rem; line-height: 1.2;">@item.Ekstralar</small>
+                                    }
+                                </div>
+                            </div>
+                            <div class="text-right ml-3">
+                                <h6 class="sepet-fiyat mb-0"><span id="satir-fiyat-@i">@((item.GuncelFiyat * item.Adet).ToString("N2"))</span> ₺</h6>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4 pt-2">
+                    <h5 class="text-muted mb-0" style="font-size: 1rem;">Toplam Tutar</h5>
+                    <h3 id="genel-toplam-fiyat" class="font-weight-bold text-white mb-0">@Model.ToplamTutar().ToString("N2") ₺</h3>
+                </div>
+
+                <button type="button" id="btnSiparisTamamla" class="btn turuncu-buton w-100 mt-3">Siparişi Tamamla</button>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+       
+        function adetDegistir(satirIndex, degisimMiktari) {
+            $.ajax({
+                url: '/Sepet/AdetGuncelleAjax',
+                type: 'POST',
+                data: { index: satirIndex, degisim: degisimMiktari },
+                success: function (sonuc) {
+                    if (sonuc.basarili) {
+                        if (sonuc.sepetBosMu) {
+                            location.reload();
+                            return;
+                        }
+
+                        if (sonuc.yeniSatirToplami == null) {
+                            
+                            $('#satir-' + satirIndex).fadeOut(300);
+                        } else {
+                           
+                            let mevcutAdet = parseInt($('#adet-gosterge-' + satirIndex).text());
+                            $('#adet-gosterge-' + satirIndex).text(mevcutAdet + degisimMiktari);
+                            $('#satir-fiyat-' + satirIndex).text(sonuc.yeniSatirToplami);
+                        }
+
+                        
+                        $('#genel-toplam-fiyat').text(sonuc.yeniToplam + ' ₺');
+
+                        
+                        if (sonuc.sayi != null) {
+                            $('#sepetSayaci').text(sonuc.sayi);
+                        }
+                    }
+                }
+            });
+        }
+
+       
+        
+        $(document).ready(function () {
+            $('#btnSiparisTamamla').click(function () {             
+                $.ajax({
+                    url: '/Sepet/SiparisiTamamlaAjax',
+                    type: 'POST',
+                    success: function (res) {
+                        if (res.basarili) {                           
+                            $('#sepetSayaci').text('0');                          
+                            let sadeOnayHtml = `
+                                <div class="text-center py-5">
+                                    <i class="fas fa-check-circle text-success mb-3" style="font-size: 3.5rem;"></i>
+                                    <h3 class="sepet-baslik mb-3" style="font-size: 1.4rem;">Sipariş Alındı!</h3>
+                                    <p class="text-muted mb-4" style="font-size: 0.9rem; line-height: 1.6;">
+                                        Siparişiniz başarıyla alındı ve mutfağa iletildi.<br> Bizi tercih ettiğiniz için teşekkür ederiz.
+                                    </p>
+                                    <a href="/Home/Index" class="btn turuncu-buton w-50">Menüye Dön</a>
+                                </div>`;                           
+                            $('.sepet-kart').html(sadeOnayHtml);
+                        }
+                    }
+                });
+
+            });
+        });
+    </script>
+}

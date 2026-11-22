@@ -1,0 +1,65 @@
+﻿@model HamburgerSiparis.EntityLayer.Urun
+
+@{
+    ViewBag.Title = "Ürün Düzenle";
+    Layout = "~/Areas/Yonetim/Views/Shared/_YonetimLayout.cshtml";
+}
+
+<div class="admin-kart shadow-lg mt-4 border-0">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-3" style="border-bottom: 1px solid #2a2a2a;">
+        <h4 class="mb-0 text-white font-weight-bold">Ürün Düzenle: <span class="text-warning">@Model.UrunAdi</span></h4>
+        <a href="/Yonetim/Urun/Index" class="btn btn-outline-light px-4 py-2" style="border-radius: 8px;">Vazgeç ve Dön</a>
+    </div>
+
+    <div class="card-body px-0">
+        @using (Html.BeginForm("Duzenle", "Urun", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.UrunId)
+
+            <div class="form-group row mb-4">
+                <label class="col-md-2 col-form-label text-light font-weight-bold">Ürün Adı</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UrunAdi, new { htmlAttributes = new { @class = "form-control bg-dark text-white border-secondary", @style = "border-radius:8px;" } })
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label class="col-md-2 col-form-label text-light font-weight-bold">Kategori</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("KategoriId", null, htmlAttributes: new { @class = "form-control bg-dark text-white border-secondary", @style = "border-radius:8px;" })
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label class="col-md-2 col-form-label text-light font-weight-bold">Fiyat (₺)</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Fiyat, new { htmlAttributes = new { @class = "form-control bg-dark text-white border-secondary", @style = "border-radius:8px;" } })
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.ResimYolu)
+
+            <div class="form-group row mb-4">
+                <label class="col-md-2 col-form-label text-light font-weight-bold">Ürün Resmi Güncelle</label>
+                <div class="col-md-10">
+                    <input type="file" name="YeniUrunResmi" class="form-control-file text-warning mt-2" accept="image/*" />
+                    <small class="text-muted">Mevcut resmi değiştirmek istemiyorsanız burayı boş bırakın.</small>
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label class="col-md-2 col-form-label text-light font-weight-bold">Açıklama</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Aciklama, new { htmlAttributes = new { @class = "form-control bg-dark text-white border-secondary", @style = "border-radius:8px;" } })
+                </div>
+            </div>
+
+            <div class="form-group row mt-4 pt-4" style="border-top: 1px solid #2a2a2a;">
+                <div class="col-md-10 offset-md-2">
+                    <button type="submit" class="btn btn-turuncu px-5 py-2 font-weight-bold" style="border-radius: 8px;">Değişiklikleri Kaydet</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
